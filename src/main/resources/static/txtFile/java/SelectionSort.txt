@@ -1,0 +1,19 @@
+public class SelectionSort {
+    public static int[] SelectionSort(int[] arr) {
+        int arrLength = arr.length;
+        for(int i = 0; i < arrLength; i += 1) {
+            int minPos = i;
+            for(int j = (i + 1); j < arrLength; j += 1) {
+                if(arr[j] < arr[minPos]) {
+                    minPos = j;
+                }
+            }
+            if(i != minPos) {
+                int tempVal = arr[i];
+                arr[i] = arr[minPos];
+                arr[minPos] = tempVal;
+            }
+        }
+        return arr;
+    }
+}

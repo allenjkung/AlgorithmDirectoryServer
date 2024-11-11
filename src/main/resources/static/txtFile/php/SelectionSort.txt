@@ -1,0 +1,17 @@
+function SelectionSort($arr) {
+    $arrLength = count($arr);
+    for($i = 0; $i < $arrLength; $i += 1) {
+        $minPos = $i;
+        for($j = ($i + 1); $j < $arrLength; $j += 1) {
+            if($arr[$j] < $arr[$minPos]) {
+                $minPos = $j;
+            }
+        }
+        if($i !== $minPos) {
+            $tempVal = $arr[$i];
+            $arr[$i] = $arr[$minPos];
+            $arr[$minPos] = $tempVal;
+        }
+    }
+    return $arr;
+}

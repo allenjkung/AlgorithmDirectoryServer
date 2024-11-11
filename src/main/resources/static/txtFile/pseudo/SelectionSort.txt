@@ -1,0 +1,6 @@
+loop for item in input list:
+    set sorted item position as position of item.
+    loop for unsorted item in unsorted array:
+        if unsorted item is less than the current sorted item,
+            set sorted item position as position of unsorted item.
+    swap position of item with position of sorted item.

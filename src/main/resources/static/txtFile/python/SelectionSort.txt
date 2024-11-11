@@ -1,0 +1,12 @@
+def SelectionSort(list):
+    listLength = len(list)
+    for i in range(listLength):
+        minPos = i;
+        for j in range((i + 1), listLength):
+            if(list[j] < list[minPos]):
+                minPos = j
+        if minPos != i:
+            tempVal = list[i]
+            list[i] = list[minPos]
+            list[minPos] = tempVal
+    return list
