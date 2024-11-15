@@ -14,8 +14,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
 
 import com.alogrithmDirectory.algorithm.SelectionSort;
+import com.alogrithmDirectory.algorithm.BubbleSort;
 import com.alogrithmDirectory.types.SortAlgorithmRequest;
 
 //TODO:: set initial git push
@@ -64,11 +66,29 @@ public class MapController {
 	@PostMapping("/runAlgorithm/{name}")
 	public Map<String, Object> sortAlgorithm(@PathVariable String name, @RequestBody SortAlgorithmRequest request) {
 		try {
-			SelectionSort selectionSortObj = new SelectionSort();
-			List<int[]> sortedList = selectionSortObj.SelectionSortSteps(request.getInputList());
+			int statusCode = 200;
+			List<int[]> sortedList = new ArrayList<int[]>();
+			switch(name) {
+				case "SelectionSort":
+					SelectionSort selectionSortObj = new SelectionSort();
+					sortedList = selectionSortObj.SelectionSortSteps(request.getInputList());
+					break;
+				case "BubbleSort":
+					BubbleSort bubbleSortObj = new BubbleSort();
+					sortedList = bubbleSortObj.BubbleSortSteps(request.getInputList());
+					break;
+				default:
+					statusCode = 500;
+			}
+
 			Map<String, Object> response = new HashMap<>();
-			response.put("status", 200);
-			response.put("output", sortedList);
+			response.put("status", statusCode);
+			if(statusCode == 200) {
+				response.put("output", sortedList);
+			}
+			else {
+				response.put("message", "Error Invalid Sorting Method.");
+			}
             return response;
 		}
 		catch(Exception err) {

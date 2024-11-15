@@ -1,0 +1,20 @@
+function BubbleSort($arr) {
+    $arrLength = count($arr);
+    $lastSwapped = ($arrLength - 1);
+    for($i = 0; $i < $arrLength; $i += 1) {
+        $swapFlag = 0;
+        for($j = 0; $j < $lastSwapped; $j += 1) {
+            if($arr[$j] > $arr[($j + 1)]) {
+                $tempVal = $arr[$j];
+                $arr[$j] = $arr[($j + 1)];
+                $arr[($j + 1)] = $tempVal;
+                $swapFlag = ($j + 1);
+            }
+        }
+        if(!$swapFlag) {
+            return $arr;
+        }
+        $lastSwapped = $swapFlag;
+    }
+    return $arr;
+}
