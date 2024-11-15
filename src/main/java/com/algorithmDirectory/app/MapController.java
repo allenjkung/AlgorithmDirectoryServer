@@ -18,9 +18,9 @@ import java.util.ArrayList;
 
 import com.alogrithmDirectory.algorithm.SelectionSort;
 import com.alogrithmDirectory.algorithm.BubbleSort;
+import com.alogrithmDirectory.algorithm.InsertionSort;
 import com.alogrithmDirectory.types.SortAlgorithmRequest;
 
-//TODO:: set initial git push
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class MapController {
@@ -76,6 +76,10 @@ public class MapController {
 				case "BubbleSort":
 					BubbleSort bubbleSortObj = new BubbleSort();
 					sortedList = bubbleSortObj.BubbleSortSteps(request.getInputList());
+					break;
+				case "InsertionSort":
+					InsertionSort insertionSortObj = new InsertionSort();
+					sortedList = insertionSortObj.InsertionSortSteps(request.getInputList());
 					break;
 				default:
 					statusCode = 500;

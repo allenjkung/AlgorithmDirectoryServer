@@ -1,0 +1,10 @@
+def InsertionSort(list):
+    listLength = len(list)
+    for i in range(listLength):
+        val = list[i]
+        j = (i - 1)
+        while j >= 0 and val < list[j]:
+            list[(j + 1)] = list[j]
+            j -= 1
+        list[(j + 1)] = val
+    return list
