@@ -1,0 +1,8 @@
+loop for item 1 in input list:
+    set pass flag as 0.
+    loop for item 2 in input list minus the last 1 plus the number of loops passed:
+        if item 2 is greater than the next item in input list:
+            swap position of item 2 with position of next item.
+            set pass flag as 1.
+    if pass flag is 0:
+        end loop.

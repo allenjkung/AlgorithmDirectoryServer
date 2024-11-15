@@ -1,0 +1,15 @@
+def BubbleSort(list):
+    listLength = len(list)
+    lastSwapped = (listLength - 1);
+    for i in range(listLength):
+        swapFlag = 0
+        for j in range(lastSwapped):
+            if list[j] > list[(j + 1)]:
+                tempVal = list[j]
+                list[j] = list[(j + 1)]
+                list[(j + 1)] = tempVal
+                swapFlag = (j + 1)
+        if not swapFlag:
+            return list
+        lastSwapped = swapFlag
+    return list
