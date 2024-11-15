@@ -1,0 +1,7 @@
+loop for unsorted item in input list:
+    set value as unsorted item.
+    set position as index of unsorted item minus 1.
+    loop while position is greater than or equal to 0 and value is less than sorted value from position in input list:
+        set position plus 1 index in input list as sorted value.
+        set position as position minus 1.
+    set position plus 1 index in input list as value.
