@@ -1,0 +1,25 @@
+Function to Merge Input List which takes in:
+Input List, Work List, Left Index, Middle Index, Right Index.
+    Set i as Left Index.
+    Set j as Middle Index.
+    Loop through Left Index to Right Index as k:
+        if i less than Middle Index and (j greater than or equal to Right index or item at position i of Input List is sorted to item at position j of Input List):
+            Set item at position k of Work List as item at position i of Input List.
+            Increase i by one.
+        Else:
+            Set item at position k of Work List as item at position j of Input List.
+            Increase j by one.
+    Return Work List.
+
+Function to perform Merge Sort which takes in:
+Input List.
+    Set Work List as copy of Input List.
+    Set Input List Length of Input List.
+    Loop i as 1 while i is less than Input List Length increasing by multiple of 2 per loop:
+        Loop j as 0 while j is less than Input List Length increasing by i * 2 per loop:
+            Set Middle Index as j + i if less than Input List Length or as Input List Length otherwise.
+            Set Right Index as j + (i * 2) if less than Input List Length or as Input List Length otherwise.
+            Set Work List as output of Function to Merge Input List using:
+                Input List, Work List, j, Middle Index, Right Index.
+        Set Input List as copy of Work List.
+    Return Input List.

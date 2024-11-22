@@ -1,0 +1,29 @@
+function IterativeMergeArr($arr, $tempArr, $leftIndex, $midIndex, $rightIndex) {
+    $i = $leftIndex;
+    $j = $midIndex;
+    for($k = $leftIndex; $k < $rightIndex; $k += 1) {
+        if($i < $midIndex && ($j >= $rightIndex || $arr[$i] <= $arr[$j])) {
+            $tempArr[$k] = $arr[$i];
+            $i += 1;
+        }
+        else {
+            $tempArr[$k] = $arr[$j];
+            $j += 1;
+        }
+    }
+    return $tempArr;
+}
+
+function IterativeMergeSort($arr) {
+    $tempArr = $arr;
+    $arrLength = count($arr);
+    for($i = 1; $i < $arrLength; $i *= 2) {
+        for($j = 0; $j < $arrLength; $j = ($j + ($i * 2))) {
+            $midIndex = ($j + $i) < $arrLength ? ($j + $i) : $arrLength;
+            $rightIndex = ($j + ($i * 2)) < $arrLength ? ($j + ($i * 2)) : $arrLength;
+            $tempArr = IterativeMergeArr($arr, $tempArr, $j, $midIndex, $rightIndex);
+        }
+        $arr = $tempArr;
+    }
+    return $arr;
+}
