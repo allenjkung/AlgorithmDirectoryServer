@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import com.alogrithmDirectory.algorithm.SelectionSort;
 import com.alogrithmDirectory.algorithm.BubbleSort;
 import com.alogrithmDirectory.algorithm.InsertionSort;
+import com.alogrithmDirectory.algorithm.IterativeMergeSort;
 import com.alogrithmDirectory.types.SortAlgorithmRequest;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -43,16 +44,32 @@ public class MapController {
 			Map<String, Object> response = new HashMap<>();
 			Map<String, String> sourceCode = new HashMap<>();
 			String[] directories = {"pseudo", "java", "python", "php"};
+			String[] subNames = {"Iterative", "Recursive"};
 			int directorysLength = directories.length;
+			int subNamesLength = subNames.length;
 
-			for(int i = 0; i < directorysLength; i += 1) {
-				String directoryName = directories[i];
-				String filePath = "src/main/resources/static/txtFile/" + directoryName + "/" + name + ".txt";
-				String content = new String(Files.readAllBytes(Paths.get(filePath)), StandardCharsets.UTF_8);
-				sourceCode.put(directoryName, content);
+			if(name.equals("MergeSort")) {
+				for(int i = 0; i < directorysLength; i += 1) {
+					String directoryName = directories[i];
+					for(int j = 0; j < subNamesLength; j += 1) {
+						String subName = subNames[j];
+						String filePath = "src/main/resources/static/txtFile/" + directoryName + "/" + subName + name + ".txt";
+						String content = new String(Files.readAllBytes(Paths.get(filePath)), StandardCharsets.UTF_8);
+						sourceCode.put((directoryName + subName), content);
+					}
+				}
+				response.put("multiSourceCode", sourceCode);
+			}
+			else {
+				for(int i = 0; i < directorysLength; i += 1) {
+					String directoryName = directories[i];
+					String filePath = "src/main/resources/static/txtFile/" + directoryName + "/" + name + ".txt";
+					String content = new String(Files.readAllBytes(Paths.get(filePath)), StandardCharsets.UTF_8);
+					sourceCode.put(directoryName, content);
+				}
+				response.put("sourceCode", sourceCode);
 			}
 			response.put("status", 200);
-			response.put("sourceCode", sourceCode);
             return response;
         }
 		catch(Exception err) {
@@ -80,6 +97,10 @@ public class MapController {
 				case "InsertionSort":
 					InsertionSort insertionSortObj = new InsertionSort();
 					sortedList = insertionSortObj.InsertionSortSteps(request.getInputList());
+					break;
+				case "MergeSort":
+					IterativeMergeSort mergeSortObj = new IterativeMergeSort();
+					sortedList = mergeSortObj.IterativeMergeSortSteps(request.getInputList());
 					break;
 				default:
 					statusCode = 500;

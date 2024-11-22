@@ -1,0 +1,36 @@
+import math
+
+def RecursiveMergeList(list, tempList, leftIndex, middleIndex, rightIndex):
+    i = leftIndex
+    j = middleIndex
+    k = leftIndex
+    while i < middleIndex and j < rightIndex:
+        if tempList[i] < tempList[j]:
+            list[k] = tempList[i]
+            i += 1
+        else:
+            list[k] = tempList[j]
+            j += 1
+        k += 1
+    while i < middleIndex:
+        list[k] = tempList[i]
+        i += 1
+        k += 1
+    while j < rightIndex:
+        list[k] = tempList[j]
+        j += 1
+        k += 1
+
+def RecursiveMergeSortSplit(list, tempList, leftIndex, rightIndex):
+    if rightIndex - leftIndex <= 1:
+        return
+    middleIndex = math.floor((leftIndex + rightIndex) / 2)
+    RecursiveMergeSortSplit(list, tempList, leftIndex, middleIndex)
+    RecursiveMergeSortSplit(list, tempList, middleIndex, rightIndex)
+    tempList = list.copy()
+    RecursiveMergeList(list, tempList, leftIndex, middleIndex, rightIndex)
+
+def RecursiveMergeSort(list):
+    listLength = len(list)
+    tempList = list.copy()
+    RecursiveMergeSortSplit(list, tempList, 0, listLength)

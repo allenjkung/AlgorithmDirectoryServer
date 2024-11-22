@@ -1,0 +1,50 @@
+public class RecursiveMergeSort {
+    public static void RecursiveMergeArr(int[] arr, int[] tempArr, int leftIndex, int middleIndex, int rightIndex) {
+        int i = leftIndex;
+        int j = middleIndex;
+        int k = leftIndex;
+        while(i < middleIndex && j < rightIndex) {
+            if(tempArr[i] < tempArr[j]) {
+                arr[k] = tempArr[i];
+                i += 1;
+            }
+            else {
+                arr[k] = tempArr[j];
+                j += 1;
+            }
+            k += 1;
+        }
+        while(i < middleIndex) {
+            arr[k] = tempArr[i];
+            i += 1;
+            k += 1;
+        }
+        while(j < rightIndex) {
+            arr[k] = tempArr[j];
+            j += 1;
+            k += 1;
+        }
+    }
+
+    public static void RecursiveMergeSplit(int[] arr, int[] tempArr, int leftIndex, int rightIndex) {
+        if((rightIndex - leftIndex) <= 1) {
+            return;
+        }
+        int middleIndex = ((leftIndex + rightIndex) / 2);
+        RecursiveMergeSplit(arr, tempArr, leftIndex, middleIndex);
+        RecursiveMergeSplit(arr, tempArr, middleIndex, rightIndex);
+        for(int i = leftIndex; i < rightIndex; i += 1) {
+            tempArr[i] = arr[i];
+        }
+        RecursiveMergeArr(arr, tempArr, leftIndex, middleIndex, rightIndex);
+    }
+
+    public static void RecursiveMergeSort(int[] arr) {
+        int arrLength = arr.length;
+        int[] tempArr = new int[arrLength];
+        for(int i = 0; i < arrLength; i += 1) {
+            tempArr[i] = arr[i];
+        }
+        RecursiveMergeSplit(arr, tempArr, 0, arrLength);
+    }
+}
