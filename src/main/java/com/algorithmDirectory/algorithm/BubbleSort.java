@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class BubbleSort {
-    public static int[] BubbleSort(int[] arr) {
+    public static void BubbleSort(int[] arr) {
         int arrLength = arr.length;
         int lastSwapped = (arrLength - 1);
         for(int i = 0; i < arrLength; i += 1) {
@@ -18,11 +18,10 @@ public class BubbleSort {
                 }
             }
             if(swapFlag == 0) {
-                return arr;
+                return;
             }
             lastSwapped = swapFlag;
         }
-        return arr;
     }
 
     public static List<int[]> BubbleSortSteps(int[] arr) {

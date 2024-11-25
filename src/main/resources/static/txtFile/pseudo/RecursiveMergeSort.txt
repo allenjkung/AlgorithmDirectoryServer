@@ -19,23 +19,23 @@ Input List, Work List, Left Index, Middle Index, Right Index.
         Set item at position k of Input List as item at position j of Work List.
         Increase j by 1.
         Increase k by 1.
-    Return Input List.
 
 Function to Split Input List which takes in:
 Input List, Work List, Left Index, Right Index.
     If Right Index minus Left Index is less than or equal to 1:
-        Return Input List.
+        End Function.
     Set Middle Index as Floor of (Left Index plus Right Index) / 2.
-    Set Input List as output of Function to Split Input List using:
+    Run Function to Split Input List using:
         Input List, Work List, Left Index, Middle Index.
-    Set Work List as output of Function to Split Input List using:
+    Run Function to Split Input List using:
         Input List, Work List, Middle Index, Right Index.
-    Return output of Function to Merge Input List using:
+    Copy items from position Left Index to Right Index of Input List into Work List
+    Run Function to Merge Input List using:
         Input List, Work List, Left Index, Middle Index, Right Index.
 
 Function to perform Merge Sort which takes in:
 Input List.
     Set Input List Length as Length of Input List.
     Set Work List as copy of Input List
-    Return output of Function to Split Input List using:
+    Run Function to Split Input List using:
         Input List, Work List, 0, Input List Length.

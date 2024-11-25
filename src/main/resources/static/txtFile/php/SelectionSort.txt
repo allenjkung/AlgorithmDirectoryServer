@@ -1,4 +1,4 @@
-function SelectionSort($arr) {
+function SelectionSort(&$arr) {
     $arrLength = count($arr);
     for($i = 0; $i < $arrLength; $i += 1) {
         $minPos = $i;
@@ -13,5 +13,4 @@ function SelectionSort($arr) {
             $arr[$minPos] = $tempVal;
         }
     }
-    return $arr;
 }

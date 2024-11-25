@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class IterativeMergeSort {
-    public static int[] IterativeMergeArr(int[] arr, int[] tempArr, int leftIndex, int middleIndex, int rightIndex) {
+    public static void IterativeMergeArr(int[] arr, int[] tempArr, int leftIndex, int middleIndex, int rightIndex) {
         int i = leftIndex;
         int j = middleIndex;
         for(int k = leftIndex; k < rightIndex; k += 1) {
@@ -17,10 +17,9 @@ public class IterativeMergeSort {
                 j += 1;
             }
         }
-        return tempArr;
     }
 
-    public static int[] IterativeMergeSort(int[] arr) {
+    public static void IterativeMergeSort(int[] arr) {
         int arrLength = arr.length;
         int[] tempArr = new int[arrLength];
         for(int i = 0; i < arrLength; i += 1) {
@@ -30,13 +29,12 @@ public class IterativeMergeSort {
             for(int j = 0; j < arrLength; j = (j + (i * 2))) {
                 int middleIndex = (j + i) < arrLength ? (j + i) : arrLength;
                 int rightIndex = (j + (i * 2)) < arrLength ? (j + (i * 2)) : arrLength;
-                tempArr = IterativeMergeArr(arr, tempArr, j, middleIndex, rightIndex);
+                IterativeMergeArr(arr, tempArr, j, middleIndex, rightIndex);
             }
             for(int j = 0; j < arrLength; j += 1) {
                 arr[j] = tempArr[j];
             }
         }
-        return arr;
     }
 
     public static List<int[]> IterativeMergeSortSteps(int[] arr) {
@@ -51,7 +49,7 @@ public class IterativeMergeSort {
             for(int j = 0; j < arrLength; j = (j + (i * 2))) {
                 int middleIndex = (j + i) < arrLength ? (j + i) : arrLength;
                 int rightIndex = (j + (i * 2)) < arrLength ? (j + (i * 2)) : arrLength;
-                tempArr = IterativeMergeArr(arr, tempArr, j, middleIndex, rightIndex);
+                IterativeMergeArr(arr, tempArr, j, middleIndex, rightIndex);
             }
             for(int j = 0; j < arrLength; j += 1) {
                 arr[j] = tempArr[j];

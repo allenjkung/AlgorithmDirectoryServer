@@ -1,4 +1,4 @@
-function RecursiveMergeArr($arr, $tempArr, $leftIndex, $middleIndex, $rightIndex) {
+function RecursiveMergeArr(&$arr, &$tempArr, $leftIndex, $middleIndex, $rightIndex) {
     $i = $leftIndex;
     $j = $middleIndex;
     $k = $leftIndex;
@@ -23,21 +23,26 @@ function RecursiveMergeArr($arr, $tempArr, $leftIndex, $middleIndex, $rightIndex
         $j += 1;
         $k += 1;
     }
-    return $arr;
 }
 
-function RecursiveMergeSortSplit($arr, $tempArr, $leftIndex, $rightIndex) {
+function RecursiveMergeSortSplit(&$arr, &$tempArr, $leftIndex, $rightIndex) {
     if($rightIndex - $leftIndex <= 1) {
-        return $arr;
+        return;
     }
     $middleIndex = floor(($leftIndex + $rightIndex) / 2);
-    $arr = RecursiveMergeSortSplit($arr, $tempArr, $leftIndex, $middleIndex);
-    $tempArr = RecursiveMergeSortSplit($arr, $tempArr, $middleIndex, $rightIndex);
-    return RecursiveMergeArr($arr, $tempArr, $leftIndex, $middleIndex, $rightIndex);
+    RecursiveMergeSortSplit($arr, $tempArr, $leftIndex, $middleIndex);
+    RecursiveMergeSortSplit($arr, $tempArr, $middleIndex, $rightIndex);
+    for ($i = $leftIndex; $i < $rightIndex; $i += 1) {
+        $tempArr[$i] = $arr[$i];
+    }
+    RecursiveMergeArr($arr, $tempArr, $leftIndex, $middleIndex, $rightIndex);
 }
 
-function RecursiveMergeSort($arr) {
+function RecursiveMergeSort(&$arr) {
     $arrLength = count($arr);
-    $tempArr = $arr;
-    return RecursiveMergeSortSplit($arr, $tempArr, 0, $arrLength);
+    $tempArr = [];
+    foreach($arr as $val) {
+        array_push($tempArr, $val);
+    }
+    RecursiveMergeSortSplit($arr, $tempArr, 0, $arrLength);
 }

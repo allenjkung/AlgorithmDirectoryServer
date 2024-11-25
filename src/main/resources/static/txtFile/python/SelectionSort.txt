@@ -9,4 +9,3 @@ def SelectionSort(list):
             tempVal = list[i]
             list[i] = list[minPos]
             list[minPos] = tempVal
-    return list

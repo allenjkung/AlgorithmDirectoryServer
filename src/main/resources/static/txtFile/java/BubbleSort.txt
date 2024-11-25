@@ -1,5 +1,5 @@
 public class BubbleSort {
-    public static int[] BubbleSort(int[] arr) {
+    public static void BubbleSort(int[] arr) {
         int arrLength = arr.length;
         int lastSwapped = (arrLength - 1);
         for(int i = 0; i < arrLength; i += 1) {
@@ -13,10 +13,9 @@ public class BubbleSort {
                 }
             }
             if(swapFlag == 0) {
-                return arr;
+                break;
             }
             lastSwapped = swapFlag;
         }
-        return arr;
     }
 }

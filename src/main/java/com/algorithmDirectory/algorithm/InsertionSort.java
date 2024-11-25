@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InsertionSort {
-    public static int[] InsertionSort(int[] arr) {
+    public static void InsertionSort(int[] arr) {
         int arrLength = arr.length;
         for(int i = 0; i < arrLength; i += 1) {
             int val = arr[i];
@@ -15,7 +15,6 @@ public class InsertionSort {
             }
             arr[(j + 1)] = val;
         }
-        return arr;
     }
 
     public static List<int[]> InsertionSortSteps(int[] arr) {
