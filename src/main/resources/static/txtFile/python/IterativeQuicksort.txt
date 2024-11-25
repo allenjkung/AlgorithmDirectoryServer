@@ -1,0 +1,30 @@
+import random
+
+def IterativePartition(list, leftIndex, rightIndex):
+    pivotIndex = random.randint(leftIndex, rightIndex)
+    pivot = list[pivotIndex]
+
+    i = leftIndex
+    j = rightIndex
+    while True:
+        while list[i] < pivot:
+            i += 1
+        while list[j] > pivot:
+            j -= 1
+        if i >= j:
+            return j
+        tempVal = list[i]
+        list[i] = list[j]
+        list[j] = tempVal
+
+def IterativeQuicksort(list):
+    stack = [[0, (len(list) - 1)]]
+    while len(stack) > 0:
+        indexes = stack.pop()
+        leftIndex = indexes[0]
+        rightIndex = indexes[1]
+
+        if leftIndex < rightIndex:
+            pivotIndex = IterativePartition(list, leftIndex, rightIndex)
+            stack.append([leftIndex, (pivotIndex - 1)])
+            stack.append([(pivotIndex + 1), rightIndex])

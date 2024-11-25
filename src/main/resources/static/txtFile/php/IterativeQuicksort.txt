@@ -1,0 +1,37 @@
+function IterativePartition(&$arr, $leftIndex, $rightIndex) {
+    $pivotIndex = rand($leftIndex, $rightIndex);
+    $pivotValue = $arr[$pivotIndex];
+    
+    $i = $leftIndex;
+    $j = $rightIndex;
+    while(true) {
+        while($arr[$i] < $pivotValue) {
+            $i += 1;
+        }
+        while($arr[$j] > $pivotValue) {
+            $j -= 1;
+        }
+        if($i >= $j) {
+            return $j;
+        }
+        $tempVal = $arr[$i];
+        $arr[$i] = $arr[$j];
+        $arr[$j] = $tempVal;
+    }
+}
+
+function IterativeQuicksort(&$arr) {
+    $stackArr = [[0, (count($arr) - 1)]];
+    while(count($stackArr) > 0) {
+        $indexes = array_pop($stackArr);
+        $leftIndex = $indexes[0];
+        $rightIndex = $indexes[1];
+        
+        if($leftIndex < $rightIndex) {
+            $pivotIndex = IterativePartition($arr, $leftIndex, $rightIndex);
+
+            array_push($stackArr, [$leftIndex, ($pivotIndex - 1)]);
+            array_push($stackArr, [($pivotIndex + 1), $rightIndex]);
+        }
+    }
+}

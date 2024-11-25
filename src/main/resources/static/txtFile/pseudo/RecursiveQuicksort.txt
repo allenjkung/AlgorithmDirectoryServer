@@ -1,0 +1,32 @@
+Function to Perform Partition which takes in:
+Input List, Left Index, Right Index.
+    Set Pivot Index as a number between Left Index and Right Index.
+    Set Pivot Value as item at position Pivot Index in Input List.
+
+    Set i as Left Index.
+    Set j as Right Index.
+    Loop while true:
+        Loop while item at position i of Input List is less than Pivot Value:
+            Increase i by 1.
+        Loop while item at position j of Input List is greater than Pivot Value:
+            Decrease j by 1.
+        If i is greater than or equal to j:
+            return j.
+        Swap item at position i of Input List with item at position j of Input List.
+
+Function to Perform Quicksort Logic which takes in:
+Input List, Left Index, Right Index.
+    If Left Index is greater than or equal to Right Index:
+        End function.
+    Set Pivot Index as the output of Function to Perform Partition using:
+        Input List, Left Index, Right Index.
+    Run Function to Perform Quicksort Logic using:
+        Input List, Left Index, Partition Index minus 1.
+    Run Function to Perform Quicksort Logic using:
+        Input List, Partition Index plus 1, Right Index.
+
+Function to Perform Quicksort which takes in:
+Input List.
+    Set Input List Length as Length of Input List.
+    Run Function to Perform Quicksort Logic using:
+        Input List, 0, Input List Length minus 1.
