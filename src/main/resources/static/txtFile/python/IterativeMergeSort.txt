@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 def IterativeMergeList(list, tempList, leftIndex, middleIndex, rightIndex):
     i = leftIndex
     j = middleIndex
@@ -10,7 +8,6 @@ def IterativeMergeList(list, tempList, leftIndex, middleIndex, rightIndex):
         else:
             tempList[k] = list[j]
             j += 1;
-    return tempList
 
 def IterativeMergeSort(list):
     tempList = list.copy()
@@ -21,8 +18,8 @@ def IterativeMergeSort(list):
         while j < listLength:
             middleIndex = min(j + i, listLength)
             rightIndex = min(j + (i * 2), listLength)
-            tempList = IterativeMergeList(list, tempList, j, middleIndex, rightIndex)
+            IterativeMergeList(list, tempList, j, middleIndex, rightIndex)
+            for k in range(j, rightIndex):
+                list[k] = tempList[k]
             j += (i * 2)
-        list = tempList.copy()
         i *= 2
-    return list

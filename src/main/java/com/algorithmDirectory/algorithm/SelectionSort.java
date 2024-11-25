@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class SelectionSort {
-    public static int[] SelectionSort(int[] arr) {
+    public static void SelectionSort(int[] arr) {
         int arrLength = arr.length;
         for(int i = 0; i < arrLength; i += 1) {
             int minPos = i;
@@ -19,7 +19,6 @@ public class SelectionSort {
                 arr[minPos] = tempVal;
             }
         }
-        return arr;
     }
 
     public static List<int[]> SelectionSortSteps(int[] arr) {

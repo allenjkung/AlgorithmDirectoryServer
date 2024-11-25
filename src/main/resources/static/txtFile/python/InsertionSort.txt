@@ -7,4 +7,3 @@ def InsertionSort(list):
             list[(j + 1)] = list[j]
             j -= 1
         list[(j + 1)] = val
-    return list

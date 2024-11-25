@@ -27,7 +27,8 @@ def RecursiveMergeSortSplit(list, tempList, leftIndex, rightIndex):
     middleIndex = math.floor((leftIndex + rightIndex) / 2)
     RecursiveMergeSortSplit(list, tempList, leftIndex, middleIndex)
     RecursiveMergeSortSplit(list, tempList, middleIndex, rightIndex)
-    tempList = list.copy()
+    for i in range(leftIndex, rightIndex):
+        tempList[i] = list[i]
     RecursiveMergeList(list, tempList, leftIndex, middleIndex, rightIndex)
 
 def RecursiveMergeSort(list):

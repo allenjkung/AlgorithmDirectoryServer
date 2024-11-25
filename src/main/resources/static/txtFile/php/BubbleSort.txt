@@ -1,4 +1,4 @@
-function BubbleSort($arr) {
+function BubbleSort(&$arr) {
     $arrLength = count($arr);
     $lastSwapped = ($arrLength - 1);
     for($i = 0; $i < $arrLength; $i += 1) {
@@ -12,9 +12,8 @@ function BubbleSort($arr) {
             }
         }
         if(!$swapFlag) {
-            return $arr;
+            break;
         }
         $lastSwapped = $swapFlag;
     }
-    return $arr;
 }
