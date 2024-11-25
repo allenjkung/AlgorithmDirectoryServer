@@ -1,0 +1,29 @@
+Function to Perform Partition which takes in:
+Input List, Left Index, Right Index.
+    Set Pivot Index as a number between Left Index and Right Index.
+    Set Pivot Value as item at position Pivot Index in Input List.
+
+    Set i as Left Index.
+    Set j as Right Index.
+    Loop while true:
+        Loop while item at position i of Input List is less than Pivot Value:
+            Increase i by 1.
+        Loop while item at position j of Input List is greater than Pivot Value:
+            Decrease j by 1.
+        If i is less than or equal to j:
+            return j.
+        Swap item at position i of Input List with item at position j of Input List.
+
+Function to Perform Quicksort which takes in:
+Input List.
+    Set Stack as a List with a List that has position 0 as 0 and position 1 as the length of Input List minus 1.
+    Loop while Stack is not empty:
+        Set Index List as the output of function to pop the latest List in Stack.
+        Set Left Index as item of position 0 of Index List.
+        Set Right Index as item of position 1 of Index List.
+
+        If Left Index is less than Right Index:
+            Set Pivot Index as output of Function to Perform Partition using:
+                Input List, Left Index, Right Index.
+            Run function to push into Stack a List that has position 0 as Left Index and position 1 as Pivot Index minus 1.
+            Run function to push into Stack a List that has position 0 as Pivot Index plus 1 and position 1 as Right Index.

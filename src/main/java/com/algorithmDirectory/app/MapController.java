@@ -20,6 +20,7 @@ import com.alogrithmDirectory.algorithm.SelectionSort;
 import com.alogrithmDirectory.algorithm.BubbleSort;
 import com.alogrithmDirectory.algorithm.InsertionSort;
 import com.alogrithmDirectory.algorithm.IterativeMergeSort;
+import com.alogrithmDirectory.algorithm.IterativeQuicksort;
 import com.alogrithmDirectory.types.SortAlgorithmRequest;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -48,7 +49,7 @@ public class MapController {
 			int directorysLength = directories.length;
 			int subNamesLength = subNames.length;
 
-			if(name.equals("MergeSort")) {
+			if(name.equals("MergeSort") || name.equals("Quicksort")) {
 				for(int i = 0; i < directorysLength; i += 1) {
 					String directoryName = directories[i];
 					for(int j = 0; j < subNamesLength; j += 1) {
@@ -101,6 +102,10 @@ public class MapController {
 				case "MergeSort":
 					IterativeMergeSort mergeSortObj = new IterativeMergeSort();
 					sortedList = mergeSortObj.IterativeMergeSortSteps(request.getInputList());
+					break;
+				case "Quicksort":
+					IterativeQuicksort quicksortObj = new IterativeQuicksort();
+					sortedList = quicksortObj.IterativeQuicksortSteps(request.getInputList());
 					break;
 				default:
 					statusCode = 500;

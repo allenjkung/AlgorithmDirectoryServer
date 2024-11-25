@@ -1,0 +1,29 @@
+import random
+
+def RecursivePartition(list, leftIndex, rightIndex):
+    pivotIndex = random.randint(leftIndex, rightIndex)
+    pivot = list[pivotIndex]
+
+    i = leftIndex
+    j = rightIndex
+    while True:
+        while list[i] < pivot:
+            i += 1
+        while list[j] > pivot:
+            j -= 1
+        if i >= j:
+            return j
+        tempVal = list[i]
+        list[i] = list[j]
+        list[j] = tempVal
+
+def RecursivePerformQuicksort(list, leftIndex, rightIndex):
+    if leftIndex >= rightIndex:
+        return
+    pivotIndex = RecursivePartition(list, leftIndex, rightIndex)
+    RecursivePerformQuicksort(list, leftIndex, (pivotIndex - 1))
+    RecursivePerformQuicksort(list, (pivotIndex + 1), rightIndex)
+
+def RecursiveQuicksort(list):
+    listLength = len(list)
+    RecursivePerformQuicksort(list, 0, (listLength - 1))

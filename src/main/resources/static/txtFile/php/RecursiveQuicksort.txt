@@ -1,0 +1,35 @@
+function RecursivePartition(&$arr, $leftIndex, $rightIndex) {
+    $pivotIndex = rand($leftIndex, $rightIndex);
+    $pivotValue = $arr[$pivotIndex];
+    
+    $i = $leftIndex;
+    $j = $rightIndex;
+    while(true) {
+        while($arr[$i] < $pivotValue) {
+            $i += 1;
+        }
+        while($arr[$j] > $pivotValue) {
+            $j -= 1;
+        }
+        if($i >= $j) {
+            return $j;
+        }
+        $tempVal = $arr[$i];
+        $arr[$i] = $arr[$j];
+        $arr[$j] = $tempVal;
+    }
+}
+
+function RecursivePerformQuicksort(&$arr, $leftIndex, $rightIndex) {
+    if($leftIndex >= $rightIndex) {
+        return;
+    }
+    $partitionIndex = RecursivePartition($arr, $leftIndex, $rightIndex);
+    RecursivePerformQuicksort($arr, $leftIndex, ($partitionIndex - 1));
+    RecursivePerformQuicksort($arr, ($partitionIndex + 1), $rightIndex);
+}
+
+function RecursiveQuicksort(&$arr) {
+    $arrLength = count($arr);
+    RecursivePerformQuicksort($arr, 0, ($arrLength - 1));
+}
