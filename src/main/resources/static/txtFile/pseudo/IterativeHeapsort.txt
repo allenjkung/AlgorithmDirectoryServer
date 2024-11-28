@@ -1,0 +1,31 @@
+Function to Sift Down which takes in:
+Input List, Root, Last Index.
+    Set Current Index as Root.
+    Loop while true:
+        Set Left Index as Current Index time 2 plus 1.
+        Set Right Index as Current Index times 2 plus 2.
+        Set Largest Index as Current Index.
+
+        If Left Index is less than Last Index and item at position Left Index of Input List is unsorted from item at position Largest Index of Input List:
+            Set Largest Index as Left Index.
+        
+        If Right Index is less than Last Index and item at position Right Index of Input List is unsorted from item at position Largest Index of Input List:
+            Set Largest Index as Right Index.
+        
+        If Largest Index is equal to Current Index:
+            End loop.
+    
+        Swap item at position Current Index of Input List with item at position Largest Index of Input List.
+        Set Current Index as Largest Index.
+
+Function to perform Heapsort which takes in:
+Input List.
+    Set Input List Length as length of Input List.
+    Loop i as Input List Length divided by 2 minus 1 and minus by 1 while greater than or equal to 0:
+        Run Function to Sift Down using:
+            Input List, i, Input List Length.
+    
+    Loop i as Input List Length minus 1 and minus 1 while greater than or equal to 0:
+        swap item at position 0 of Input List Length with item at position i.
+        Run Function to Sift Down using:
+            Input List, 0, i.

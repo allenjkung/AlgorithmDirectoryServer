@@ -1,0 +1,27 @@
+def RecursiveSiftDown(list, root, lastIndex):
+    leftIndex = ((root * 2) + 1)
+    rightIndex = ((root * 2) + 2)
+    largestIndex = root
+
+    if leftIndex < lastIndex and list[leftIndex] > list[largestIndex]:
+        largestIndex = leftIndex
+    if rightIndex < lastIndex and list[rightIndex] > list[largestIndex]:
+        largestIndex = rightIndex
+    
+    if largestIndex != root:
+        tempVal = list[root]
+        list[root] = list[largestIndex]
+        list[largestIndex] = tempVal
+        RecursiveSiftDown(list, largestIndex, lastIndex)
+
+def RecursiveHeapSort(list):
+    listLength = len(list)
+
+    for i in range(int(listLength / 2) - 1, -1, -1):
+        RecursiveSiftDown(list, i, listLength)
+    
+    for i in range(listLength - 1, -1, -1):
+        tempVal = list[0]
+        list[0] = list[i]
+        list[i] = tempVal
+        RecursiveSiftDown(list, 0, i)
