@@ -1,0 +1,36 @@
+public class RecursiveHeapsort {
+    public static void RecursiveSiftDown(int[] arr, int root, int lastIndex) {
+        int leftIndex = ((root * 2) + 1);
+        int rightIndex = ((root * 2) + 2);
+        int largestIndex = root;
+
+        if(leftIndex < lastIndex && arr[leftIndex] > arr[largestIndex]) {
+            largestIndex = leftIndex;
+        }
+        if(rightIndex < lastIndex && arr[rightIndex] > arr[largestIndex]) {
+            largestIndex = rightIndex;
+        }
+
+        if (largestIndex != root) {
+            int tempVal = arr[root];
+            arr[root] = arr[largestIndex];
+            arr[largestIndex] = tempVal;
+            RecursiveSiftDown(arr, largestIndex, lastIndex);
+        }
+    }
+    
+    public static void RecursiveHeapsort(int[] arr) {
+        int arrLength = arr.length;
+        
+        for(int i = ((arrLength / 2) - 1); i >= 0; i -= 1) {
+            RecursiveSiftDown(arr, i, arrLength);
+        }
+
+        for(int i = (arrLength - 1); i >= 0; i -= 1) {
+            int tempVal = arr[0];
+            arr[0] = arr[i];
+            arr[i] = tempVal;
+            RecursiveSiftDown(arr, 0, i);
+        }
+    }
+}

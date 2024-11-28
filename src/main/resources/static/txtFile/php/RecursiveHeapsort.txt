@@ -1,0 +1,35 @@
+function RecursiveSiftDown(&$arr, $root, $lastIndex) {
+    $leftIndex = (($root * 2) + 1);
+    $rightIndex = (($root * 2) + 2);
+    $largestIndex = $root;
+
+    if($leftIndex < $lastIndex && $arr[$leftIndex] > $arr[$largestIndex]) {
+        $largestIndex = $leftIndex;
+    }
+    if($rightIndex < $lastIndex && $arr[$rightIndex] > $arr[$largestIndex]) {
+        $largestIndex = $rightIndex;
+    }
+
+    if($largestIndex != $root) {
+        $tempVal = $arr[$root];
+        $arr[$root] = $arr[$largestIndex];
+        $arr[$largestIndex] = $tempVal;
+        RecursiveSiftDown($arr, $largestIndex, $lastIndex);
+    }
+}
+
+function RecursiveHeapsort(&$arr) {
+    $arrLength = count($arr);
+
+    for($i = ((int)($arrLength / 2) - 1); $i >= 0; $i -= 1) {
+        RecursiveSiftDown($arr, $i, $arrLength);
+    }
+
+    for($i = ($arrLength - 1); $i >= 0; $i -= 1) {
+        $temp = $arr[0];
+        $arr[0] = $arr[$i];
+        $arr[$i] = $temp;
+
+        RecursiveSiftDown($arr, 0, $i);
+    }
+}

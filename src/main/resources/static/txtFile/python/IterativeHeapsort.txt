@@ -1,0 +1,32 @@
+def IterativeSiftDown(list, root, lastIndex):
+    currentIndex = root
+
+    while True:
+        leftIndex = ((currentIndex * 2) + 1)
+        rightIndex = ((currentIndex * 2) + 2)
+        largestIndex = currentIndex
+
+        if leftIndex < lastIndex and list[leftIndex] > list[largestIndex]:
+            largestIndex = leftIndex
+        if rightIndex < lastIndex and list[rightIndex] > list[largestIndex]:
+            largestIndex = rightIndex
+    
+        if largestIndex == currentIndex:
+            break
+
+        tempVal = list[currentIndex]
+        list[currentIndex] = list[largestIndex]
+        list[largestIndex] = tempVal
+        currentIndex = largestIndex
+
+def IterativeHeapSort(list):
+    listLength = len(list)
+
+    for i in range(int(listLength / 2) - 1, -1, -1):
+        IterativeSiftDown(list, i, listLength)
+    
+    for i in range(listLength - 1, -1, -1):
+        tempVal = list[0]
+        list[0] = list[i]
+        list[i] = tempVal
+        IterativeSiftDown(list, 0, i)
