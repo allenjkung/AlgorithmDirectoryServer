@@ -1,0 +1,20 @@
+def CountingSort(list):
+    listLength = len(list)
+    maxVal = list[0]
+    for i in range(1, listLength):
+        if maxVal < list[i]:
+            maxVal = list[i]
+    
+    outputList = [0] * listLength
+    countList = [0] * (maxVal + 1)
+    for i in list:
+        countList[i] += 1
+    for i in range(1, maxVal + 1):
+        countList[i] += countList[i - 1]
+    for i in range(listLength - 1, -1, -1):
+        j = list[i]
+        countList[j] -= 1
+        outputList[countList[j]] = list[i]
+
+    for i in range(0, listLength):
+        list[i] = outputList[i]
