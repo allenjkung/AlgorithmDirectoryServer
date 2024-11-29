@@ -22,6 +22,7 @@ import com.alogrithmDirectory.algorithm.InsertionSort;
 import com.alogrithmDirectory.algorithm.IterativeMergeSort;
 import com.alogrithmDirectory.algorithm.IterativeQuicksort;
 import com.alogrithmDirectory.algorithm.IterativeHeapsort;
+import com.alogrithmDirectory.algorithm.CountingSort;
 import com.alogrithmDirectory.types.SortAlgorithmRequest;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -111,6 +112,10 @@ public class MapController {
 				case "Heapsort":
 					IterativeHeapsort heapsortObj = new IterativeHeapsort();
 					sortedList = heapsortObj.IterativeHeapsortSteps(request.getInputList());
+					break;
+				case "CountingSort":
+					CountingSort countingSortObj = new CountingSort();
+					sortedList = countingSortObj.CountingSortSteps(request.getInputList());
 					break;
 				default:
 					statusCode = 500;
