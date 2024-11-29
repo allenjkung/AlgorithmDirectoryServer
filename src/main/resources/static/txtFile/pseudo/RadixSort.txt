@@ -1,0 +1,26 @@
+Function to perform Counting Sort which takes in:
+Input List, Place Number.
+Set Input List Length as length of Input List.
+Set Output List as a List of zeros the length of Input List Length.
+Set Count List as a List of zeros the length of 10.
+Loop through each Item in Input List:
+    Set Radix Value as reminder of Item divided by Place Number divided by 10.
+    Increase number at position of Radix Value in Count List by 1.
+Loop i as 1 and increment up to 10:
+    Increment Number of position i in Count List by the Number of position i - 1 in Count List.
+Loop i as Input List Length minus 1 and decrement until less than 0:
+    Set Radix Value as reminder of item at position i of Input List divided by Place Number divided by 10.
+    Decrement Number of position Radix Value in Count List by 1.
+    Set item of position number of position Radix Value in Count List in Output List as item of position i of Input List.
+Copy Output List items into Input List.
+
+Function to perform Radix Sort which takes in:
+Input List.
+Set Input List Length as length of Input List.
+Set Max Value as item at position 1 of Input List.
+Loop i as 1 and increment up to length of Input List:
+    If Max Value is less than item at position i of Input List:
+        Set Max Value as item at position i of Input List.
+Loop i as 1 and multiply by 10 while Max Value divided i is greater than 0:
+    Run Function to perform Counting Sort using:
+        Input List, i.

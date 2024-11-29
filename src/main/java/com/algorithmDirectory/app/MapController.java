@@ -23,6 +23,7 @@ import com.alogrithmDirectory.algorithm.IterativeMergeSort;
 import com.alogrithmDirectory.algorithm.IterativeQuicksort;
 import com.alogrithmDirectory.algorithm.IterativeHeapsort;
 import com.alogrithmDirectory.algorithm.CountingSort;
+import com.alogrithmDirectory.algorithm.RadixSort;
 import com.alogrithmDirectory.types.SortAlgorithmRequest;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -116,6 +117,10 @@ public class MapController {
 				case "CountingSort":
 					CountingSort countingSortObj = new CountingSort();
 					sortedList = countingSortObj.CountingSortSteps(request.getInputList());
+					break;
+				case "RadixSort":
+					RadixSort radixSortObj = new RadixSort();
+					sortedList = radixSortObj.RadixSortSteps(request.getInputList());
 					break;
 				default:
 					statusCode = 500;
