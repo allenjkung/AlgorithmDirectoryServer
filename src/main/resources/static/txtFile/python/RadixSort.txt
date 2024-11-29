@@ -1,0 +1,27 @@
+def CountingSort(list, place):
+    listLength = len(list)
+    outputList = [0] * listLength;
+    countList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for val in list:
+        radixVal = ((val // place) % 10)
+        countList[radixVal] += 1
+    for i in range(1, 10):
+        countList[i] += countList[i - 1]
+    for i in range(listLength - 1, -1, -1):
+        radixVal = ((list[i] // place) % 10)
+        countList[radixVal] -= 1
+        outputList[countList[radixVal]] = list[i]
+
+    for i in range(0, listLength):
+        list[i] = outputList[i]
+
+def RadixSort(list):
+    listLength = len(list)
+    maxVal = list[0]
+    for i in range(1, listLength):
+        if maxVal < list[i]:
+            maxVal = list[i]
+    i = 1
+    while (maxVal / i) > 0:
+        CountingSort(list, i)
+        i *= 10
