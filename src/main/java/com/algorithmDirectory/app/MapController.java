@@ -24,6 +24,7 @@ import com.alogrithmDirectory.algorithm.IterativeQuicksort;
 import com.alogrithmDirectory.algorithm.IterativeHeapsort;
 import com.alogrithmDirectory.algorithm.CountingSort;
 import com.alogrithmDirectory.algorithm.RadixSort;
+import com.alogrithmDirectory.algorithm.BucketSort;
 import com.alogrithmDirectory.types.SortAlgorithmRequest;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -121,6 +122,10 @@ public class MapController {
 				case "RadixSort":
 					RadixSort radixSortObj = new RadixSort();
 					sortedList = radixSortObj.RadixSortSteps(request.getInputList());
+					break;
+				case "BucketSort":
+					BucketSort bucketSortObj = new BucketSort();
+					sortedList = bucketSortObj.BucketSortSteps(request.getInputList());
 					break;
 				default:
 					statusCode = 500;

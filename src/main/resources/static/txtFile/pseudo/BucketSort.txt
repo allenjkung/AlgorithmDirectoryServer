@@ -1,0 +1,33 @@
+Set Bucket Count as desired amount of buckets to create.
+Set Min Value as item of position 0 of Input List.
+Set Max Value as item of position 0 of Input List.
+Loop for Item in Input List:
+    If Min Value is greater than Item:
+        Set Min Value as Item.
+    If Max Value is less than Item:
+        Set Max Value as Item.
+If Min Value equals Max Value:
+    End function.
+Set j as 0.
+Set Buckets as an empty mutable array.
+Set Steps as Max Value minus Min Value divided by Bucket Count.
+If Steps is greater than 0:
+    Loop i as 0 and increment to Bucket Count:
+        Run function to add an empty mutable array in Buckets.
+    Loop for Item in Input List:
+        Set Bucket Key as floor of Item minus Min Value divided by Steps.
+        Run function push Item into array at position Bucket Key in Buckets.
+    Loop for Bucket in Buckets:
+        Run function to sort Bucket.
+        Loop for Item in Buckets:
+            Set item at position j in Input List as Item.
+            Increment j by 1.
+Else:
+    Set Bucket Count as Max Value minus Min Value.
+    Set Buckets as a List of zeros the length of Bucket Count + 1.
+    Loop Item in Input List:
+        Increment position Item minus Min Value in Buckets by 1.
+    Loop Bucket Id as 0 and increment to Bucket Count:
+        Loop i as 0 and increment to item of position Bucket Id in Buckets:
+            Set item as position j in Input List as Bucket Id plus Min Value.
+            Increment j by 1.

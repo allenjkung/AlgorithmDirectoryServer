@@ -1,0 +1,49 @@
+function BucketSort(&$arr) {
+    $bucketCount = 100;
+    $minVal = $arr[0];
+    $maxVal = $arr[0];
+    foreach($arr as $val) {
+        if($minVal > $val) {
+            $minVal = $val;
+        }
+        if($maxVal < $val) {
+            $maxVal = $val;
+        }
+    }
+    if($minVal == $maxVal) {
+        return;
+    }
+
+    $j = 0;
+    $buckets = [];
+    $steps = ($maxVal - $minVal) / $bucketCount;
+    if($steps > 0) {
+        for($i = 0; $i <= $bucketCount; $i += 1) {
+            array_push($buckets, []);
+        }
+        foreach($arr as $val) {
+            $bucketId = floor(($val - $minVal) / $steps);
+            array_push($buckets[$bucketId], $val);
+        }
+        foreach($buckets as $bucket) {
+            sort($bucket);
+            foreach($bucket as $val) {
+                $arr[$j] = $val;
+                $j += 1;
+            }
+        }
+    }
+    else {
+        $bucketCount = ($maxVal - $minVal);
+        $buckets = array_fill(0, $bucketCount + 1, 0);
+        foreach($arr as $val) {
+            $buckets[($val - $minVal)] += 1;
+        }
+        foreach($buckets as $val => $count) {
+            for($i = 0; $i < $count; $i += 1) {
+                $arr[$j] = ($val + $minVal);
+                $j += 1;
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+import math
+
+def BucketSort(list):
+    bucketCount = 100
+    minVal = list[0]
+    maxVal = list[0]
+    for val in list:
+        if minVal > val:
+            minVal = val
+        if maxVal < val:
+            maxVal = val
+    if minVal == maxVal:
+        return;
+    j = 0
+    buckets = []
+    steps = ((maxVal - minVal) / bucketCount)
+    if steps > 0:
+        for i in range(0, bucketCount + 1):
+            buckets.append([])
+        for val in list:
+            bucketId = math.floor((val - minVal) / steps)
+            buckets[bucketId].append(val)
+        for bucket in buckets:
+            bucket.sort()
+            for val in bucket:
+                list[j] = val
+                j += 1
+    else:
+        bucketCount = (maxVal - minVal)
+        buckets = [0] * (bucketCount + 1)
+        for val in list:
+            buckets[(val - minVal)] += 1
+        for bucketId in range(0, bucketCount + 1):
+            dupCount = buckets[bucketId]
+            for i in range(0, dupCount):
+                list[j] = (bucketId + minVal)
+                j += 1
