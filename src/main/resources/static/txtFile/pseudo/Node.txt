@@ -1,0 +1,12 @@
+Class Node:
+    Set public or private property as Value.
+    Set public method to construct Class Node which takes in:
+    New Value.
+        Set Value as New Value.
+    Set public method to Set Value which takes in:
+    New Value.
+        Set Value as New Value.
+    Set public method to Get Value:
+        return Value.
+    Set public method to print out Class:
+        return readable output of Class.

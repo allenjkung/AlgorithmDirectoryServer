@@ -148,4 +148,30 @@ public class MapController {
 			return response;
 		}
 	}
+
+	@GetMapping("/getDataStructure/{name}")
+	public Map<String, Object> getDataStructure(@PathVariable String name) {
+		try {
+			Map<String, Object> response = new HashMap<>();
+			Map<String, String> sourceCode = new HashMap<>();
+			String[] directories = {"pseudo", "java", "python", "php"};
+			int directorysLength = directories.length;
+
+			for(int i = 0; i < directorysLength; i += 1) {
+				String directoryName = directories[i];
+				String filePath = "src/main/resources/static/txtFile/" + directoryName + "/" + name + ".txt";
+				String content = new String(Files.readAllBytes(Paths.get(filePath)), StandardCharsets.UTF_8);
+				sourceCode.put(directoryName, content);
+			}
+			response.put("sourceCode", sourceCode);
+			response.put("status", 200);
+            return response;
+		}
+		catch(Exception err) {
+			Map<String, Object> response = new HashMap<>();
+			response.put("status", 500);
+			response.put("message", "Error reading the file: " + err.getMessage());
+			return response;
+		}
+	}
 }

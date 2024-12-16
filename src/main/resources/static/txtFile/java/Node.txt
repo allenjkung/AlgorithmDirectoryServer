@@ -1,0 +1,19 @@
+public class Node {
+    private int value;
+
+    public Node(int value) {
+        this.value = value;
+    }
+
+    public void setValue(int nValue) {
+        this.value = nValue;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    public String toString() {
+        return ("Node: value: " + this.value);
+    }
+}

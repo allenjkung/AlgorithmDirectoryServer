@@ -1,0 +1,19 @@
+class Node {
+    private $value;
+
+    public function __construct($value) {
+        $this->value = $value;
+    }
+
+    public function setValue($nValue) {
+        $this->value = $nValue;
+    }
+
+    public function getValue() {
+        return $this->value;
+    }
+
+    public function __toString() {
+        return ("Node: value: " . $this->value);
+    }
+}
