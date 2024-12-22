@@ -1,0 +1,119 @@
+Class Singly Node:
+    Set public or private property as Value.
+    Set public or private property as Next Node.
+    Set public method to construct Class Node which takes in:
+    New Value.
+        Set Value as New Value.
+    Set public method to Set Value which takes in:
+    New Value.
+        Set Value as New Value.
+    Set public method to Set Next Node which takes in:
+    New Node.
+        Set Next Node as New Node.
+    Set public method to Get Value:
+        return Value.
+    Set public method to Get Next Node:
+        return Next Node.
+
+Class Singly Linked List:
+    Set public or private property as Head Node
+    Set public or private property as Tail Node
+    Set public or private property as List Size
+
+    Set public or private method to Set Previous and Current Node which takes in:
+    Previous Node, Current Node, Position.
+        Loop as 0 and increment until greater than or equal to Position:
+            Set Previous Node as Current Node.
+            Set Current Node as result of Previous Node method to Get Next Node.
+    
+    Set public method to Push Value which takes in:
+    Value, Position: optional as 0.
+        If Position is greater than List Size or Position is less than 0:
+            End method.
+        Set New Node as class Singly Node using:
+            Value.
+        If Position is equal to 0:
+            Run New Node method to Set Next Node using:
+                Head Node.
+            Set Head Node as New Node.
+        If Position is equal to List Size:
+            If List Size is not equal to 0:
+                Run Tail Node method to Set Next Node using:
+                    New Node.
+            Set Tail Node as New Node.
+        If Position is greater than 0 and Position is less than List Size:
+            Set Previous Node as Head Node.
+            Set Current Node as Head Node.
+            Run method to Set Previous and Current Node using:
+                Previous Node, Current Node, Position.
+            Run Previous Node Method to Set Next Node using:
+                New Node.
+            Run New Node Method to Set Next Node using:
+                Current Node.
+        Increment List Size by 1.
+    
+    Set public method to Pop Value which takes in:
+    Position: optional as 0.
+        If Position is greater than or equal to List Size or Position less than 0:
+            End method.
+        Set Removed Node as Head Node.
+        If Position is equal to 0:
+            Set Head Node as result of Removed Node method Get Next Node.
+        Else if Position is greater than 0:
+            Set Previous Node as Head Node.
+            Set Current Node as Head Node.
+            Run method to Set Previous and Current Node using:
+                Previous Node, Current Node, Position.
+            Set Removed Node as Current Node.
+            Run Previous Node method to Set Next Node using:
+                Result of Removed Node method Get Next Node.
+            If Position is equal to List Size minus 1:
+                Set Tail Node as Previous Node.
+        Decrement List Size by 1.
+        If List Size is equal to 0:
+            Set Head Node as not set value.
+            Set Tail Node as not set value.
+        Return Result of Removed Node method Get Value.
+
+    Set public method to Set Node Value which takes in:
+    Position, Value.
+        If Position is equal to 0:
+            Run Head Node method to Set Value using:
+                Value.
+        Else if Position is equal to List Size minus 1:
+            Run Tail Node method to Set Value using:
+                Value.
+        Else if Position is greater than 0 and Position is less than List Size minus 1:
+            Set Current Node as Head Node.
+            Loop 0 and increment until less than Position:
+                Set Current Node as result of Current Node method to Get Next Node.
+            Run Current Node method to Set Value using:
+                Value.
+    
+    Set public method to Get Node Value which takes in:
+    Position.
+        If Position is equal to 0:
+            Return result of Head Node method to Get Value.
+        Else if Position is equal to List Size minus 1:
+            Return result of Tail Node method to Get Value.
+        Else if Position is greater than 0 and Position is less than List Size minus 1:
+            Set Current Node as Head Node.
+            Loop 0 and increment until less than Position:
+                Set Current Node as result of Current Node method to Get Next Node.
+            Return result of Current Node method to Get Value.
+        Return a not set value.
+
+    Set public method to Search Node Value which takes in:
+    Value.
+        Set Linked List Size as List Size.
+        Set Current Node as Head Node.
+        Loop 0 as index and increment until less than Linked List Size:
+            If result of Current Node method Get Value is equal to Value:
+                Return index.
+            Set Current Node as result of Current Node method Get Next Node.
+        Return -1.
+    
+    Set public method to Get Size:
+        Return List Size.
+    Set public method to print out Class:
+        return readable output of Class.

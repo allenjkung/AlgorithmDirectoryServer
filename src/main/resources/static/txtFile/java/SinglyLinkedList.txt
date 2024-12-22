@@ -1,0 +1,164 @@
+public class SinglyNode {
+    private int value;
+    private SinglyNode next;
+
+    public SinglyNode(int value) {
+        this.value = value;
+    }
+
+    public void setValue(int nValue) {
+        this.value = nValue;
+    }
+
+    public void setNext(SinglyNode node) {
+        this.next = node;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    public SinglyNode getNext() {
+        return this.next;
+    }
+}
+
+public class SinglyLinkedList {
+    private SinglyNode head;
+    private SinglyNode tail;
+    private int size = 0;
+
+    public SinglyNode[] setPrevAndCurrNodes(SinglyNode prevNode, SinglyNode currNode, int position) {
+        for(int i = 0; i < position; i += 1) {
+            prevNode = currNode;
+            currNode = prevNode.getNext();
+        }
+        return new SinglyNode[] {prevNode, currNode};
+    }
+
+    public void push(int value, int position) {
+        if(position > this.size || position < 0) {
+            return;
+        }
+
+        SinglyNode newNode = new SinglyNode(value);
+        if(position == 0) {
+            newNode.setNext(this.head);
+            this.head = newNode;
+        }
+        if(position == this.size) {
+            if(this.size != 0) {
+                this.tail.setNext(newNode);
+            }
+            this.tail = newNode;
+        }
+        if(position > 0 && position < this.size) {
+            SinglyNode[] prevAndCurrNodes = setPrevAndCurrNodes(this.head, this.head, position);
+            SinglyNode prevNode = prevAndCurrNodes[0];
+            SinglyNode currNode = prevAndCurrNodes[1];
+            prevNode.setNext(newNode);
+            newNode.setNext(currNode);
+        }
+
+        this.size += 1;
+    }
+
+    public void push(int value) {
+        this.push(value, 0);
+    }
+
+    public Integer pop(int position) {
+        if(position >= this.size || position < 0) {
+            return null;
+        }
+        
+        SinglyNode removedNode = this.head;
+        if(position == 0) {
+            this.head = removedNode.getNext();
+        }
+        else if(position > 0) {
+            SinglyNode[] prevAndCurrNodes = setPrevAndCurrNodes(this.head, this.head, position);
+            SinglyNode prevNode = prevAndCurrNodes[0];
+            SinglyNode currNode = prevAndCurrNodes[1];
+            removedNode = currNode;
+            prevNode.setNext(removedNode.getNext());
+            if(position == (this.size - 1)) {
+                this.tail = prevNode;
+            }
+        }
+
+        this.size -= 1;
+        if(this.size == 0) {
+            this.head = null;
+            this.tail = null;
+        }
+        return removedNode.getValue();
+    }
+
+    public int pop() {
+        return this.pop(0);
+    }
+
+    public void setNodeValue(int position, int value) {
+        if(position == 0) {
+            this.head.setValue(value);
+        }
+        else if(position == (this.size - 1)) {
+            this.tail.setValue(value);
+        }
+        else if(position > 0 && position < (this.size - 1)) {
+            SinglyNode currNode = this.head;
+            for(int i = 0; i < position; i += 1) {
+                currNode = currNode.getNext();
+            }
+            currNode.setValue(value);
+        }
+    }
+
+    public Integer getNodeValue(int position) {
+        if(position == 0) {
+            return this.head.getValue();
+        }
+        else if(position == (this.size - 1)) {
+            return this.tail.getValue();
+        }
+        else if(position > 0 && position < (this.size - 1)) {
+            SinglyNode currNode = this.head;
+            for(int i = 0; i < position; i += 1) {
+                currNode = currNode.getNext();
+            }
+            return currNode.getValue();
+        }
+        return null;
+    }
+
+    public int searchNodeValue(int value) {
+        int listSize = this.size;
+        SinglyNode currNode = this.head;
+        for(int i = 0; i < listSize; i += 1) {
+            if(currNode.getValue() == value) {
+                return i;
+            }
+            currNode = currNode.getNext();
+        }
+        return -1;
+    }
+
+    public int getSize() {
+        return this.size;
+    }
+
+    public String toString() {
+        if(this.size == 0) {
+            return "Linked List: Empty";
+        }
+        int listSize = this.size;
+        String linkListStr = "Linked List:";
+        SinglyNode currNode = this.head;
+        for(int i = 0; i < listSize; i += 1) {
+            linkListStr += (" " + currNode.getValue());
+            currNode = currNode.getNext();
+        }
+        return linkListStr;
+    }
+}

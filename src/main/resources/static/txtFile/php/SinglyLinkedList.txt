@@ -1,0 +1,156 @@
+class SinglyNode {
+    private $value;
+    private $next;
+
+    public function __construct($value) {
+        $this->value = $value;
+    }
+
+    public function setValue($nValue) {
+        $this->value = $nValue;
+    }
+
+    public function setNext($node) {
+        $this->next = $node;
+    }
+
+    public function getValue() {
+        return $this->value;
+    }
+
+    public function getNext() {
+        return $this->next;
+    }
+}
+
+class SinglyLinkedList {
+    private $head;
+    private $tail;
+    private $size = 0;
+
+    private function setPrevAndCurrNodes(&$prevNode, &$currNode, $position) {
+        for($i = 0; $i < $position; $i += 1) {
+            $prevNode = $currNode;
+            $currNode = $prevNode->getNext();
+        }
+    }
+
+    public function push($value, $position = 0) {
+        if($position > $this->size || $position < 0) {
+            return;
+        }
+
+        $newNode = new SinglyNode($value);
+        if($position === 0) {
+            $newNode->setNext($this->head);
+            $this->head = $newNode;
+        }
+        if($position === $this->size) {
+            if($this->size !== 0) {
+                $this->tail->setNext($newNode);
+            }
+            $this->tail = $newNode;
+        }
+        if($position > 0 && $position < $this->size) {
+            $prevNode = $this->head;
+            $currNode = $this->head;
+            $this->setPrevAndCurrNodes($prevNode, $currNode, $position);
+            $prevNode->setNext($newNode);
+            $newNode->setNext($currNode);
+        }
+        
+        $this->size += 1;
+    }
+
+    public function pop($position = 0) {
+        if($position >= $this->size || $position < 0) {
+            return;
+        }
+
+        $removedNode = $this->head;
+        if($position === 0) {
+            $this->head = $removedNode->getNext();
+        }
+        else if($position > 0) {
+            $prevNode = $this->head;
+            $currNode = $this->head;
+            $this->setPrevAndCurrNodes($prevNode, $currNode, $position);
+            $removedNode = $currNode;
+            $prevNode->setNext($removedNode->getNext());
+            if($position === ($this->size - 1)) {
+                $this->tail = $prevNode;
+            }
+        }
+
+        $this->size -= 1;
+        if($this->size === 0) {
+            $this->head = null;
+            $this->tail = null;
+        }
+        
+        return $removedNode->getValue();
+    }
+
+    public function setNodeValue($position, $value) {
+        if($position === 0) {
+            $this->head->setValue($value);
+        }
+        else if($position === ($this->size - 1)) {
+            $this->tail->setValue($value);
+        }
+        else if($position > 0 && $position < ($this->size - 1)) {
+            $currNode = $this->head;
+            for($i = 0; $i < $position; $i += 1) {
+                $currNode = $currNode->getNext();
+            }
+            $currNode->setValue($value);
+        }
+    }
+
+    public function getNodeValue($position) {
+        if($position === 0) {
+            return $this->head->getValue();
+        }
+        else if($position === ($this->size - 1)) {
+            return $this->tail->getValue();
+        }
+        else if($position > 0 && $position < ($this->size - 1)) {
+            $currNode = $this->head;
+            for($i = 0; $i < $position; $i += 1) {
+                $currNode = $currNode->getNext();
+            }
+            return $currNode->getValue();
+        }
+        return null;
+    }
+
+    public function searchNodeValue($value) {
+        $linkListSize = $this->size;
+        $currNode = $this->head;
+        for($i = 0; $i < $linkListSize; $i += 1) {
+            if($currNode->getValue() === $value) {
+                return $i;
+            }
+            $currNode = $currNode->getNext();
+        }
+        return -1;
+    }
+
+    public function getSize() {
+        return $this->size;
+    }
+
+    public function __toString() {
+        if($this->size === 0) {
+            return "Linked List: Empty";
+        }
+        $linkListSize = $this->size;
+        $linkListStr = "Linked List:";
+        $currNode = $this->head;
+        for($i = 0; $i < $linkListSize; $i += 1) {
+            $linkListStr .= (" " . $currNode->getValue());
+            $currNode = $currNode->getNext();
+        }
+        return $linkListStr;
+    }
+}
