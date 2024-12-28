@@ -1,8 +1,9 @@
-public class SinglyNode {
+public class DoublyNode {
     private int value;
-    private SinglyNode next;
+    private DoublyNode next;
+    private DoublyNode prev;
 
-    public SinglyNode(int value) {
+    public DoublyNode(int value) {
         this.value = value;
     }
 
@@ -10,30 +11,37 @@ public class SinglyNode {
         this.value = nValue;
     }
 
-    public void setNext(SinglyNode node) {
+    public void setNext(DoublyNode node) {
         this.next = node;
+    }
+
+    public void setPrev(DoublyNode node) {
+        this.prev = node;
     }
 
     public int getValue() {
         return this.value;
     }
 
-    public SinglyNode getNext() {
+    public DoublyNode getNext() {
         return this.next;
+    }
+
+    public DoublyNode getPrev() {
+        return this.prev;
     }
 }
 
-public class SinglyLinkedList {
-    private SinglyNode head;
-    private SinglyNode tail;
+public class DoublyLinkedList {
+    private DoublyNode head;
+    private DoublyNode tail;
     private int size = 0;
 
-    private SinglyNode[] setPrevAndCurrNodes(SinglyNode prevNode, SinglyNode currNode, int position) {
+    private DoublyNode getCurrentNode(DoublyNode currNode, int position) {
         for(int i = 0; i < position; i += 1) {
-            prevNode = currNode;
-            currNode = prevNode.getNext();
+            currNode = currNode.getNext();
         }
-        return new SinglyNode[] {prevNode, currNode};
+        return currNode;
     }
 
     public void push(int value, int position) {
@@ -41,23 +49,28 @@ public class SinglyLinkedList {
             return;
         }
 
-        SinglyNode newNode = new SinglyNode(value);
+        DoublyNode newNode = new DoublyNode(value);
         if(position == 0) {
             newNode.setNext(this.head);
+            if(this.size != 0) {
+                this.head.setPrev(newNode);
+            }
             this.head = newNode;
         }
         if(position == this.size) {
             if(this.size != 0) {
                 this.tail.setNext(newNode);
+                newNode.setPrev(this.tail);
             }
             this.tail = newNode;
         }
         if(position > 0 && position < this.size) {
-            SinglyNode[] prevAndCurrNodes = setPrevAndCurrNodes(this.head, this.head, position);
-            SinglyNode prevNode = prevAndCurrNodes[0];
-            SinglyNode currNode = prevAndCurrNodes[1];
+            DoublyNode currNode = getCurrentNode(this.head, position);
+            DoublyNode prevNode = currNode.getPrev();
             prevNode.setNext(newNode);
+            newNode.setPrev(prevNode);
             newNode.setNext(currNode);
+            currNode.setPrev(newNode);
         }
 
         this.size += 1;
@@ -72,19 +85,23 @@ public class SinglyLinkedList {
             return null;
         }
         
-        SinglyNode removedNode = this.head;
+        DoublyNode removedNode = this.head;
         if(position == 0) {
             this.head = removedNode.getNext();
+            this.head.setPrev(null);
         }
-        else if(position > 0) {
-            SinglyNode[] prevAndCurrNodes = setPrevAndCurrNodes(this.head, this.head, position);
-            SinglyNode prevNode = prevAndCurrNodes[0];
-            SinglyNode currNode = prevAndCurrNodes[1];
+        else if(position == (this.size - 1)) {
+            removedNode = this.tail;
+            this.tail = removedNode.getPrev();
+            this.tail.setNext(null);
+        }
+        else if(position > 0 && position < (this.size - 1)) {
+            DoublyNode currNode = getCurrentNode(this.head, position);
             removedNode = currNode;
-            prevNode.setNext(removedNode.getNext());
-            if(position == (this.size - 1)) {
-                this.tail = prevNode;
-            }
+            DoublyNode prevNode = removedNode.getPrev();
+            DoublyNode nextNode = removedNode.getNext();
+            prevNode.setNext(nextNode);
+            nextNode.setPrev(prevNode);
         }
 
         this.size -= 1;
@@ -107,10 +124,7 @@ public class SinglyLinkedList {
             this.tail.setValue(value);
         }
         else if(position > 0 && position < (this.size - 1)) {
-            SinglyNode currNode = this.head;
-            for(int i = 0; i < position; i += 1) {
-                currNode = currNode.getNext();
-            }
+            DoublyNode currNode = getCurrentNode(this.head, position);
             currNode.setValue(value);
         }
     }
@@ -123,10 +137,7 @@ public class SinglyLinkedList {
             return this.tail.getValue();
         }
         else if(position > 0 && position < (this.size - 1)) {
-            SinglyNode currNode = this.head;
-            for(int i = 0; i < position; i += 1) {
-                currNode = currNode.getNext();
-            }
+            DoublyNode currNode = getCurrentNode(this.head, position);
             return currNode.getValue();
         }
         return null;
@@ -134,7 +145,7 @@ public class SinglyLinkedList {
 
     public int searchNodeValue(int value) {
         int listSize = this.size;
-        SinglyNode currNode = this.head;
+        DoublyNode currNode = this.head;
         for(int i = 0; i < listSize; i += 1) {
             if(currNode.getValue() == value) {
                 return i;
@@ -154,7 +165,7 @@ public class SinglyLinkedList {
         }
         int listSize = this.size;
         String linkListStr = "Linked List:";
-        SinglyNode currNode = this.head;
+        DoublyNode currNode = this.head;
         for(int i = 0; i < listSize; i += 1) {
             linkListStr += (" " + currNode.getValue());
             currNode = currNode.getNext();

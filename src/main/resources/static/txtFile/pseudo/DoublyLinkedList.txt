@@ -1,7 +1,8 @@
-Class Singly Node:
+Class Doubly Node:
     Set public or private property as Value.
     Set public or private property as Next Node.
-    
+    Set public or private property as Previous Node.
+
     Set public method to construct Class Node which takes in:
     New Value.
         Set Value as New Value.
@@ -14,47 +15,62 @@ Class Singly Node:
     New Node.
         Set Next Node as New Node.
     
+    Set public method to Set Previous Node which takes in:
+    New Node.
+        Set Previous Node as New Node.
+    
     Set public method to Get Value:
         return Value.
     
     Set public method to Get Next Node:
         return Next Node.
+    
+    Set public method to Get Previous Node:
+        return Previous Node.
 
-Class Singly Linked List:
+Class Doubly Linked List:
     Set public or private property as Head Node.
     Set public or private property as Tail Node.
     Set public or private property as List Size equal to 0.
 
-    Set public or private method to Set Previous and Current Node which takes in:
-    Previous Node, Current Node, Position.
+    Set public or private method to Get Current Node which takes in:
+    Current Node, Position.
         Loop as 0 and increment until greater than or equal to Position:
-            Set Previous Node as Current Node.
-            Set Current Node as result of Previous Node method to Get Next Node.
+            Set Current Node as result of Current Node method to Get Next Node.
+        Return Current Node.
     
     Set public method to Push Value which takes in:
     Value, Position: optional as 0.
         If Position is greater than List Size or Position is less than 0:
             End method.
-        Set New Node as class Singly Node using:
+        Set New Node as class Doubly Node using:
             Value.
         If Position is equal to 0:
             Run New Node method to Set Next Node using:
                 Head Node.
+            If List Size is not equal to 0:
+                Run Head Node method to Set Previous Node using:
+                    New Node.
             Set Head Node as New Node.
         If Position is equal to List Size:
             If List Size is not equal to 0:
                 Run Tail Node method to Set Next Node using:
                     New Node.
+                Run New Node method to Set Previous Node using:
+                    Tail Node.
             Set Tail Node as New Node.
         If Position is greater than 0 and Position is less than List Size:
-            Set Previous Node as Head Node.
-            Set Current Node as Head Node.
-            Run method to Set Previous and Current Node using:
-                Previous Node, Current Node, Position.
-            Run Previous Node method to Set Next Node using:
+            Set Current Node as result of method Get Current Node using:
+                Head Node, Position.
+            Set Previous Node as result of Current Node method to Get Previous Node.
+            Run Previous Node Method to Set Next Node using:
                 New Node.
+            Run New Node method to Set Previous Node using:
+                Previous Node.
             Run New Node method to Set Next Node using:
                 Current Node.
+            Run Current Node method to set Previous Node using:
+                New Node.
         Increment List Size by 1.
     
     Set public method to Pop Value which takes in:
@@ -64,16 +80,21 @@ Class Singly Linked List:
         Set Removed Node as Head Node.
         If Position is equal to 0:
             Set Head Node as result of Removed Node method Get Next Node.
-        Else if Position is greater than 0:
-            Set Previous Node as Head Node.
-            Set Current Node as Head Node.
-            Run method to Set Previous and Current Node using:
-                Previous Node, Current Node, Position.
+            Run Head Node method to Set Previous Node as not set value.
+        Else if Position is equal to List Size minus 1:
+            Set Removed Node as Tail Node.
+            Set Tail Node as result of Removed Node method to Get Previous Node.
+            Run Tail Node method to Set Next Node as not set value.
+        Else if Position is greater than 0 and Position is less than List Size minus 1:
+            Set Current Node as result of method Get Current Node using:
+                Head Node, Position.
             Set Removed Node as Current Node.
+            Set Previous Node as result of Removed Node method to Get Previous Node.
+            Set Next Node as result of Removed Node method to Get Next Node.
             Run Previous Node method to Set Next Node using:
-                Result of Removed Node method Get Next Node.
-            If Position is equal to List Size minus 1:
-                Set Tail Node as Previous Node.
+                Next Node.
+            Run Next Node method to Set Previous Node using:
+                Previous Node.
         Decrement List Size by 1.
         If List Size is equal to 0:
             Set Head Node as not set value.
@@ -89,9 +110,8 @@ Class Singly Linked List:
             Run Tail Node method to Set Value using:
                 Value.
         Else if Position is greater than 0 and Position is less than List Size minus 1:
-            Set Current Node as Head Node.
-            Loop 0 and increment until less than Position:
-                Set Current Node as result of Current Node method to Get Next Node.
+            Set Current Node as result of method Get Current Node using:
+                Head Node, Position.
             Run Current Node method to Set Value using:
                 Value.
     
@@ -102,9 +122,8 @@ Class Singly Linked List:
         Else if Position is equal to List Size minus 1:
             Return result of Tail Node method to Get Value.
         Else if Position is greater than 0 and Position is less than List Size minus 1:
-            Set Current Node as Head Node.
-            Loop 0 and increment until less than Position:
-                Set Current Node as result of Current Node method to Get Next Node.
+            Set Current Node as result of method Get Current Node using:
+                Head Node, Position.
             Return result of Current Node method to Get Value.
         Return a not set value.
 

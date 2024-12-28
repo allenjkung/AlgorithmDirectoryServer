@@ -1,0 +1,168 @@
+class DoublyNode {
+    private $value;
+    private $next;
+    private $prev;
+
+    public function __construct($value) {
+        $this->value = $value;
+    }
+
+    public function setValue($nValue) {
+        $this->value = $nValue;
+    }
+
+    public function setNext($node) {
+        $this->next = $node;
+    }
+
+    public function setPrev($node) {
+        $this->prev = $node;
+    }
+
+    public function getValue() {
+        return $this->value;
+    }
+
+    public function getNext() {
+        return $this->next;
+    }
+
+    public function getPrev() {
+        return $this->prev;
+    }
+}
+
+class DoublyLinkedList {
+    private $head;
+    private $tail;
+    private $size = 0;
+
+    private function getCurrNode($currNode, $position) {
+        for($i = 0; $i < $position; $i += 1) {
+            $currNode = $currNode->getNext();
+        }
+        return $currNode;
+    }
+
+    public function push($value, $position = 0) {
+        if($position > $this->size || $position < 0) {
+            return;
+        }
+
+        $newNode = new DoublyNode($value);
+        if($position === 0) {
+            $newNode->setNext($this->head);
+            if($this->size !== 0) {
+                $this->head->setPrev($newNode);
+            }
+            $this->head = $newNode;
+        }
+        if($position === $this->size) {
+            if($this->size !== 0) {
+                $this->tail->setNext($newNode);
+                $newNode->setPrev($this->tail);
+            }
+            $this->tail = $newNode;
+        }
+        if($position > 0 && $position < $this->size) {
+            $currNode = $this->getCurrNode($this->head, $position);
+            $prevNode = $currNode->getPrev();
+            $prevNode->setNext($newNode);
+            $newNode->setPrev($prevNode);
+            $newNode->setNext($currNode);
+            $currNode->setPrev($newNode);
+        }
+        
+        $this->size += 1;
+    }
+
+    public function pop($position = 0) {
+        if($position >= $this->size || $position < 0) {
+            return;
+        }
+
+        $removedNode = $this->head;
+        if($position === 0) {
+            $this->head = $removedNode->getNext();
+            $this->head->setPrev(null);
+        }
+        else if($position === ($this->size - 1)) {
+            $removedNode = $this->tail;
+            $this->tail = $removedNode->getPrev();
+            $this->tail->setNext(null);
+        }
+        else if($position > 0 && $position < ($this->size - 1)) {
+            $currNode = $this->getCurrNode($this->head, $position);
+            $removedNode = $currNode;
+            $prevNode = $removedNode->getPrev();
+            $nextNode = $removedNode->getNext();
+            $prevNode->setNext($nextNode);
+            $nextNode->setPrev($prevNode);
+        }
+
+        $this->size -= 1;
+        if($this->size === 0) {
+            $this->head = null;
+            $this->tail = null;
+        }
+        
+        return $removedNode->getValue();
+    }
+
+    public function setNodeValue($position, $value) {
+        if($position === 0) {
+            $this->head->setValue($value);
+        }
+        else if($position === ($this->size - 1)) {
+            $this->tail->setValue($value);
+        }
+        else if($position > 0 && $position < ($this->size - 1)) {
+            $currNode = $this->getCurrNode($this->head, $position);
+            $currNode->setValue($value);
+        }
+    }
+
+    public function getNodeValue($position) {
+        if($position === 0) {
+            return $this->head->getValue();
+        }
+        else if($position === ($this->size - 1)) {
+            return $this->tail->getValue();
+        }
+        else if($position > 0 && $position < ($this->size - 1)) {
+            $currNode = $this->getCurrNode($this->head, $position);
+            return $currNode->getValue();
+        }
+        return null;
+    }
+
+    public function searchNodeValue($value) {
+        $linkListSize = $this->size;
+        $currNode = $this->head;
+        for($i = 0; $i < $linkListSize; $i += 1) {
+            if($currNode->getValue() === $value) {
+                return $i;
+            }
+            $currNode = $currNode->getNext();
+        }
+        return -1;
+    }
+
+    public function getSize() {
+        return $this->size;
+    }
+
+    public function __toString() {
+        if($this->size === 0) {
+            return "Linked List: Empty";
+        }
+        $linkListSize = $this->size;
+        $linkListStr = "Linked List:";
+        $currNode = $this->head;
+        for($i = 0; $i < $linkListSize; $i += 1) {
+            $linkListStr .= (" " . $currNode->getValue());
+            $currNode = $currNode->getNext();
+        }
+        return $linkListStr;
+    }
+}
